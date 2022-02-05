@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<StackPane id="main-pane" fx:id="mainPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@css/styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.dylanhurtado.menulateraldinamico.menulateraldinamico.Controller">
+   <children>
+      <VBox fx:id="vbox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" StackPane.alignment="CENTER">
+         <children>
+            <HBox id="toolbar" fx:id="hbox" alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity">
+               <children>
+                  <FontIcon id="icon-menu" fx:id="menuIcon" accessibleRole="BUTTON" iconLiteral="fas-bars" iconSize="24" onMouseClicked="#playAnimationMenu" HBox.hgrow="SOMETIMES">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></FontIcon>
+               </children>
+            </HBox>
+            <StackPane id="app-pane" fx:id="appPane" alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" styleClass="background" VBox.vgrow="ALWAYS">
+               <children>
+                  <Button fx:id="show" mnemonicParsing="false" onAction="#playPreview" styleClass="lang-button" text="%show" StackPane.alignment="CENTER" />
+                  <fx:include fx:id="previewView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" source="preview.fxml" StackPane.alignment="CENTER" />
+                  <fx:include fx:id="preferencesView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" source="preferences.fxml" StackPane.alignment="CENTER" />
+                  <VBox id="vtoolbar" fx:id="vtoolbar" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="123.0" StackPane.alignment="BOTTOM_LEFT">
+                     <children>
+                        <VBox fx:id="div1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="div">
+                           <children>
+                              <VBox fx:id="wrapper1" accessibleRole="BUTTON" alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#shop" styleClass="wrapper">
+                                 <children>
+                                    <FontIcon fx:id="opcionIcon1" iconLiteral="fas-shopping-cart" iconSize="22" styleClass="tool-icon">
+                                       <VBox.margin>
+                                          <Insets bottom="2.0" top="2.0" />
+                                       </VBox.margin>
+                                    </FontIcon>
+                                    <Label fx:id="opcion1" text="%shop" />
+                                 </children>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </VBox>
+                              <VBox fx:id="wrapper2" alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#games" styleClass="wrapper">
+                                 <children>
+                                    <FontIcon fx:id="opcionIcon2" iconLiteral="fas-gamepad" iconSize="22" styleClass="tool-icon" />
+                                    <Label fx:id="opcion2" text="%games" />
+                                 </children>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </VBox>
+                              <VBox fx:id="wrapper3" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#photos" styleClass="wrapper">
+                                 <children>
+                                    <FontIcon fx:id="opcionIcon3" iconLiteral="fas-photo-video" iconSize="22" styleClass="tool-icon" />
+                                    <Label fx:id="opcion3" text="%photos" />
+                                 </children>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </VBox>
+                           </children>
+                        </VBox>
+                        <VBox id="div" fx:id="div2" alignment="BOTTOM_CENTER" VBox.vgrow="ALWAYS">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <children>
+                              <VBox fx:id="wrapper4" alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#preferences" styleClass="wrapper">
+                                 <children>
+                                    <FontIcon fx:id="opcionIcon4" iconLiteral="fas-sliders-h" iconSize="22" styleClass="tool-icon" />
+                                    <Label fx:id="opcion4" text="%preferences" />
+                                 </children>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </VBox>
+                              <VBox fx:id="wrapper5" alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#exit" styleClass="wrapper">
+                                 <children>
+                                    <FontIcon fx:id="opcionIcon5" iconLiteral="fas-power-off" iconSize="22" styleClass="tool-icon" />
+                                    <Label fx:id="opcion5" text="%exit" />
+                                 </children>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </VBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+               </children>
+            </StackPane>
+         </children>
+      </VBox>
+   </children>
+</StackPane>

@@ -1,0 +1,83 @@
+
+#toolbar{
+    -fx-background-color: #6ffa96;
+    -fx-padding: 0.5em;
+}
+#vtoolbar{
+    -fx-padding: 0;
+    -fx-background-color: #67ea8d;
+}
+.background{
+    -fx-background-color: #ebdff5;
+}
+
+.wrapper{
+    -fx-background-color: #bfea8c;
+    -fx-padding: 0.2em;
+}
+.wrapper:hover{
+    -fx-background-color: #363636;
+    -fx-opacity: 95% ;
+
+}
+#icon-menu:hover{
+    -fx-icon-color:white;
+}
+.tool-icon{-fx-icon-size:22;-fx-icon-color:black;}
+.wrapper:hover .tool-icon{
+    -fx-icon-color:white;
+    -fx-icon-size:30
+}
+.lang-button{
+    -fx-padding: 1em 3em;
+    -fx-font-size: 14;
+    -fx-background-color: #8c8c8c;
+    -fx-effect: dropshadow(gaussian, lightgray, 1, 1.0, 7, 7);
+}
+.lang-button:hover{
+    -fx-background-color: #6ffa96;
+    -fx-effect: dropshadow(gaussian, black, 1, 1.0, 7, 7);
+}
+
+#back-button{
+    -fx-padding: 0.5em 1em;
+    -fx-font-size: 14;
+    -fx-background-color: #8c8c8c;
+    -fx-effect: dropshadow(gaussian, lightgray, 1, 1.0, 4, 4);
+}
+#back-button:hover{
+    -fx-background-color: #6ffa96;
+    -fx-effect: dropshadow(gaussian, black, 1, 1.0, 4, 4);
+}
+#labelLang{
+    -fx-font-size: 2em;
+}
+
+#save-button{
+    -fx-padding: 2em 4em;
+    -fx-font-size: 14;
+    -fx-background-color: #bfea8c;
+    -fx-effect: dropshadow(gaussian, lightgray, 1, 1.0, 7, 7);
+    -fx-border-radius: 2%;
+    -fx-opacity: 98%;
+}
+
+#save-button:hover{
+    -fx-background-color: #bfea8c;
+    -fx-effect: dropshadow(gaussian, darkgrey, 1, 1.0, 7, 7);
+    -fx-border-color: white;
+    -fx-opacity: 100%;
+}
+.label-data{
+    -fx-font-size: 16;
+    -fx-font-family: "DejaVu Sans";
+    -fx-font-weight: bold;
+}
+.label,.button{-fx-font-family: "Liberation Mono"}
+
+#vbox-preview{
+    -fx-effect: dropshadow(gaussian, darkgrey, 1, 1.0, 2, 2);
+}
+
+
+
