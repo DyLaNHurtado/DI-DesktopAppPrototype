@@ -16,6 +16,9 @@ import java.util.ResourceBundle;
 
 public class PreviewController implements Initializable {
     @FXML
+    public VBox vboxPreview;
+
+    @FXML
     private ImageView avatar;
 
     @FXML
@@ -31,19 +34,15 @@ public class PreviewController implements Initializable {
     @FXML
     private StackPane previewPane;
 
+    @FXML
+    private Button saveButton;
+
 
     private Person person;
 
     TranslateTransition animation;
 
 
-    @FXML
-    private void hidePreview() {
-        animation = new TranslateTransition(Duration.millis(350), previewPane);
-        animation.setFromX(0);
-        animation.setToX(2000);
-        animation.play();
-    }
 
     @FXML
     @Override
@@ -53,6 +52,15 @@ public class PreviewController implements Initializable {
         this.email.setText(person.getEmail());
         this.gender.setText(person.getGender());
     }
+
+    @FXML
+    private void hidePreview() {
+        animation = new TranslateTransition(Duration.millis(350), previewPane);
+        animation.setFromX(0);
+        animation.setToX(2000);
+        animation.play();
+    }
+
 
 
     public void setPerson(Person person) {
