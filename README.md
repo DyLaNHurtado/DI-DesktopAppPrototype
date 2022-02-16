@@ -6,4 +6,4 @@
 
 ## Preview
 
-<img src="logo.gif" alt="preview appDesktopPrototype DyLaNHurtado" />
+<img src="https://raw.githubusercontent.com/DyLaNHurtado/DI-DesktopAppPrototype/master/img/preview.gif" alt="preview appDesktopPrototype DyLaNHurtado" width="500" />
