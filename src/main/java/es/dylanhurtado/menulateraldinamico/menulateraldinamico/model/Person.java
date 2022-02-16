@@ -1,13 +1,17 @@
 package es.dylanhurtado.menulateraldinamico.menulateraldinamico.model;
 
+import java.util.UUID;
+
 public class Person {
-    private Long id;
+    private UUID id;
+    private String avatar;
     private String name;
     private String email;
     private String gender;
 
-    public Person(Long id, String name, String email, String gender) {
-        this.id=id;
+    public Person(UUID id, String avatar, String name, String email, String gender) {
+        this.id = id;
+        this.avatar = avatar;
         this.name = name;
         this.email = email;
         this.gender = gender;
@@ -16,11 +20,19 @@ public class Person {
     public Person() {
     }
 
-    public Long getId() {
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -46,5 +58,10 @@ public class Person {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

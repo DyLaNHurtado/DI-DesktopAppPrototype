@@ -2,18 +2,19 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
+<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<StackPane id="main-pane" fx:id="mainPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@css/styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.dylanhurtado.menulateraldinamico.menulateraldinamico.Controller">
+<StackPane id="main-pane" fx:id="mainPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="100.0" minWidth="200.0" prefHeight="600.0" prefWidth="800.0" stylesheets="@css/styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.dylanhurtado.menulateraldinamico.menulateraldinamico.Controller">
    <children>
-      <VBox fx:id="vbox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" StackPane.alignment="CENTER">
+      <VBox fx:id="vbox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="100.0" minWidth="200.0" prefHeight="500.0" prefWidth="700.0" StackPane.alignment="CENTER">
          <children>
-            <HBox id="toolbar" fx:id="hbox" alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity">
+            <HBox id="toolbar" fx:id="hbox" alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="40.0" minWidth="-Infinity" prefHeight="40.0" prefWidth="500.0">
                <children>
                   <FontIcon id="icon-menu" fx:id="menuIcon" accessibleRole="BUTTON" iconLiteral="fas-bars" iconSize="24" onMouseClicked="#playAnimationMenu" HBox.hgrow="SOMETIMES">
                      <cursor>
@@ -21,12 +22,33 @@
                      </cursor></FontIcon>
                </children>
             </HBox>
-            <StackPane id="app-pane" fx:id="appPane" alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" styleClass="background" VBox.vgrow="ALWAYS">
+            <StackPane id="app-pane" fx:id="appPane" alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="200.0" styleClass="background" VBox.vgrow="ALWAYS">
                <children>
-                  <Button fx:id="show" mnemonicParsing="false" onAction="#playPreview" styleClass="lang-button" text="%show" StackPane.alignment="CENTER" />
-                  <fx:include fx:id="previewView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" source="preview.fxml" StackPane.alignment="CENTER" />
-                  <fx:include fx:id="preferencesView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" source="preferences.fxml" StackPane.alignment="CENTER" />
-                  <VBox id="vtoolbar" fx:id="vtoolbar" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="123.0" StackPane.alignment="BOTTOM_LEFT">
+                  <VBox id="vbox-reload" fx:id="vboxReload" accessibleRole="BUTTON" alignment="CENTER" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#loadData" prefHeight="50.0" prefWidth="50.0" StackPane.alignment="TOP_RIGHT">
+                     <children>
+                        <FontIcon id="reload" fx:id="reload" iconLiteral="fas-retweet" iconSize="24">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </FontIcon>
+                     </children>
+                     <StackPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </StackPane.margin>
+                  </VBox>
+                  <PieChart fx:id="pieChartGender" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="250.0" title="%titleGraph" StackPane.alignment="CENTER_RIGHT">
+                     <StackPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </StackPane.margin>
+                  </PieChart>
+                  <ListView id="list-view" fx:id="listView" maxHeight="1.7976931348623157E308" prefHeight="100.0" prefWidth="400.0" StackPane.alignment="CENTER">
+                     <StackPane.margin>
+                        <Insets bottom="50.0" left="130.0" right="225.0" top="50.0" />
+                     </StackPane.margin>
+                  </ListView>
+                  <fx:include fx:id="preview" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" source="preview.fxml" StackPane.alignment="CENTER" />
+                  <fx:include fx:id="preferences" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" source="preferences.fxml" StackPane.alignment="CENTER" />
+                  <VBox id="vtoolbar" fx:id="vtoolbar" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="125.0" StackPane.alignment="BOTTOM_LEFT">
                      <children>
                         <VBox fx:id="div1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="div">
                            <children>
@@ -43,7 +65,7 @@
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </VBox>
-                              <VBox fx:id="wrapper2" alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#games" styleClass="wrapper">
+                              <VBox fx:id="wrapper2" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#games" styleClass="wrapper">
                                  <children>
                                     <FontIcon fx:id="opcionIcon2" iconLiteral="fas-gamepad" iconSize="22" styleClass="tool-icon" />
                                     <Label fx:id="opcion2" text="%games" />
@@ -63,7 +85,7 @@
                               </VBox>
                            </children>
                         </VBox>
-                        <VBox id="div" fx:id="div2" alignment="BOTTOM_CENTER" VBox.vgrow="ALWAYS">
+                        <VBox id="div" fx:id="div2" alignment="BOTTOM_CENTER" maxHeight="1.7976931348623157E308" VBox.vgrow="SOMETIMES">
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>

@@ -1,49 +1,75 @@
 package es.dylanhurtado.menulateraldinamico.menulateraldinamico;
 
+import es.dylanhurtado.menulateraldinamico.menulateraldinamico.model.Person;
 import javafx.animation.TranslateTransition;
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
+import java.io.IOException;
+import java.net.URI;
 import java.net.URL;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.ResourceBundle;
+import java.util.UUID;
 
 public class Controller implements Initializable {
     @FXML
     private StackPane appPane;
 
     @FXML
-    private StackPane previewView;
+    private PreviewController previewController;
 
     @FXML
-    private StackPane preferencesView;
+    private StackPane preview;
+
+    @FXML
+    private PieChart pieChartGender;
+
+    @FXML
+    private StackPane preferences;
 
     @FXML
     private VBox vtoolbar;
 
+    @FXML
+    private ListView<Person> listView;
+
     private boolean menuIsVisible;
     private TranslateTransition menuAnimation, preferencesAnimation, previewAnimation;
-
+    private ObservableList<Person> people;
+    private ObservableList<PieChart.Data> datosGraficoCircular;
+    private int contFemales;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        people = FXCollections.observableArrayList();
         vtoolbar.setTranslateX(-200);
-        preferencesView.setTranslateY(600);
-        previewView.setTranslateX(2000);
+        preferences.setTranslateY(600);
+        preview.setTranslateX(2000);
         menuIsVisible = false;
+        loadData();
     }
 
     @FXML
     private void playAnimationMenu() {
         menuAnimation = new TranslateTransition(Duration.millis(250), vtoolbar);
-        preferencesAnimation = new TranslateTransition(Duration.millis(250), preferencesView);
-        previewAnimation = new TranslateTransition(Duration.millis(250), previewView);
+        preferencesAnimation = new TranslateTransition(Duration.millis(250), preferences);
+        previewAnimation = new TranslateTransition(Duration.millis(250), preview);
 
         if (!menuIsVisible) {
             menuAnimation.setFromX(-vtoolbar.getWidth());
@@ -59,8 +85,65 @@ public class Controller implements Initializable {
         preferencesAnimation.play();
     }
 
+    @FXML
+    private void loadData() {
+        contFemales = 0;
+        Runnable task = () -> {
+            HttpClient client = HttpClient.newHttpClient();
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create("https://randomuser.me/api/?results=50"))
+                    .build();
+
+            HttpResponse<String> response = null;
+            try {
+                response = client.send(request, HttpResponse.BodyHandlers.ofString());
+                Platform.runLater(() -> listView.getItems().removeAll(people));
+                //Tendria que mapear el results pero con el substring me lo ahorro
+                JSONArray dataArray = new JSONArray(response.body().substring(11, response.body().length() - 1));
+                for (int i = 0; i < dataArray.length(); i++) {
+                    JSONObject row = dataArray.getJSONObject(i);
+                    if (row.getString("gender").equalsIgnoreCase("female")) {
+                        contFemales++;
+                    }
+                    Platform.runLater(() -> people.add(new Person(UUID.randomUUID(),
+                            row.getJSONObject("picture").getString("large"),
+                            row.getJSONObject("name").getString("first") + " " + row.getJSONObject("name").getString("last"),
+                            row.getString("email"),
+                            row.getString("gender"))));
+                }
+                Platform.runLater(() -> {
+                    setListView();
+                    initGraphic();
+                });
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
+        };
+
+        new Thread(task).start();
+
+    }
+
+    private void setListView() {
+        listView.setItems(people);
+        listView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                playPreview();
+                previewController.setPerson(listView.getSelectionModel().getSelectedItem());
+            }
+        });
+    }
+
+    private void initGraphic() {
+        datosGraficoCircular = FXCollections.observableArrayList(
+                new PieChart.Data("Female", contFemales * 100 / 50),
+                new PieChart.Data("Male", (50f - contFemales) * 100 / 50));
+        pieChartGender.setData(datosGraficoCircular);
+        pieChartGender.setClockwise(false);
+    }
+
     private void playAnimationPreferences() {
-        preferencesAnimation = new TranslateTransition(Duration.millis(250), preferencesView);
+        preferencesAnimation = new TranslateTransition(Duration.millis(250), preferences);
 
         preferencesAnimation.setFromY(600);
         preferencesAnimation.setToY(0);
@@ -71,7 +154,7 @@ public class Controller implements Initializable {
 
     @FXML
     private void playPreview() {
-        previewAnimation = new TranslateTransition(Duration.millis(350), previewView);
+        previewAnimation = new TranslateTransition(Duration.millis(350), preview);
 
         previewAnimation.setFromX(2000);
         previewAnimation.setToX(0);
@@ -84,7 +167,7 @@ public class Controller implements Initializable {
     protected void shop() {
         appPane.setBackground(new Background(
                 new BackgroundFill(
-                        Color.PINK, CornerRadii.EMPTY, Insets.EMPTY)));
+                        Color.LIGHTSALMON, CornerRadii.EMPTY, Insets.EMPTY)));
         playAnimationMenu();
     }
 
@@ -92,7 +175,7 @@ public class Controller implements Initializable {
     protected void games() {
         appPane.setBackground(new Background(
                 new BackgroundFill(
-                        Color.LIGHTCORAL, CornerRadii.EMPTY, Insets.EMPTY)));
+                        Color.LIGHTGOLDENRODYELLOW, CornerRadii.EMPTY, Insets.EMPTY)));
         playAnimationMenu();
     }
 
@@ -100,7 +183,7 @@ public class Controller implements Initializable {
     protected void photos() {
         appPane.setBackground(new Background(
                 new BackgroundFill(
-                        Color.LIGHTBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+                        Color.LIGHTSTEELBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
         playAnimationMenu();
     }
 
